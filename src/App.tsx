@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'store/store';
+import { actions } from 'store/feature1/reducers';
+import { retrieveUsers } from 'store/feature1/actions';
 
-function App() {
-  const [count, setCount] = useState(0);
+const App: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const count = useSelector((state: RootState) => state.feature1.num);
+
+  const users = useSelector((state: RootState) => state.feature1.users);
 
   return (
     <div className='App'>
@@ -11,16 +19,27 @@ function App() {
         <img src={logo} className='App-logo' alt='logo' />
         <p>React Redux Toolkit Redux Observable Template</p>
         <p>
-          <button type='button' onClick={() => setCount((count) => count + 1)}>
+          <button
+            type='button'
+            onClick={() => {
+              dispatch(actions.increment(1));
+            }}
+          >
             count is: {count}
           </button>
         </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
+        <button
+          type='button'
+          onClick={() => {
+            dispatch(retrieveUsers({ hello: 'hello' }));
+          }}
+        >
+          Click to get the users and increment counter after that
+        </button>
+        <p>{JSON.stringify(users)}</p>
       </header>
     </div>
   );
-}
+};
 
 export default App;
