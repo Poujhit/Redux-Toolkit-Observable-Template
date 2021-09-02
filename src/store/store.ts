@@ -1,14 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
-import feature1Reducer from './feature1/reducers';
+import feature1Reducer from './feature1/reducer';
+import feature2Reducer from './feature2/reducer';
 import feature1Epics from './feature1/epics';
+import feature2Epics from './feature2/epics';
 
 const rootReducer = combineReducers({
   feature1: feature1Reducer.reducer, // now the feature1 key contains all reducers.
+  feature2: feature2Reducer.reducer,
 });
 
-const rootEpic = combineEpics(feature1Epics as any);
+// make this type safe
+const rootEpic = combineEpics(feature1Epics as any, feature2Epics as any);
 
 const epicMiddleware = createEpicMiddleware({
   dependencies: {
