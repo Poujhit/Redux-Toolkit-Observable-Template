@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import { retrieveUsers } from './actions';
 // for connecting a epic to the action in the reducer.
-import { actions } from './reducers';
+import { actions } from './reducer';
 
 const retrieveUsersEpic = (
   action$: Observable<AnyAction>,

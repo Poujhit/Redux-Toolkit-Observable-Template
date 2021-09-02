@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import initialState from './intialState'; // initialState = feature1State
+import initialState from './initialState'; // initialState = feature1State
 
 const feature1Reducer = createSlice({
   name: 'feature1',
